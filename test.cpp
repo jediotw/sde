@@ -1,21 +1,26 @@
 #include<bits/stdc++.h>
 using namespace std;
 int main(){
-    int n;
+    long long n;
     cin>>n;
-    //sieve of eratosthenes - find all primes from 1 to n
-    vector<bool> isPrime(n+1,true);
-    isPrime[0]=isPrime[1]=false;
-    for(int i=2;i*i<=n;i++){
-        if(isPrime[i]){
-            for(int j=i*i;j<=n;j+=i){
-                isPrime[j]=false;
-            }
-        }
+    long long temp=n;
+    int digits=0;
+    while(temp>0){
+        digits++;
+        temp/=10;
     }
-    for(int i=2;i<=n;i++){
-        if(isPrime[i]) cout<<i<<" ";
+    temp=n;
+    long long sum=0;
+    while(temp>0){
+        int d=temp%10;
+        long long p=1;
+        for(int i=0;i<digits;i++) p*=d;
+        sum+=p;
+        temp/=10;
     }
-    cout<<"\n";
+    if(sum==n)
+        cout<<"YES\n";
+    else
+        cout<<"NO\n";
     return 0;
 }
