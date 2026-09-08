@@ -1,26 +1,23 @@
 #include<bits/stdc++.h>
 using namespace std;
 int main(){
-    long long n;
+    int n;
     cin>>n;
-    long long temp=n;
-    int digits=0;
-    while(temp>0){
-        digits++;
-        temp/=10;
+    vector<int> a(n);
+    for(int i=0;i<n;i++) cin>>a[i];
+    int large = INT_MIN, second = INT_MIN;
+    for(int i=0;i<n;i++){
+        if(a[i]>large){
+            second = large;
+            large = a[i];
+        }else if(a[i]>second && a[i]!=large){
+            second = a[i];
+        }
     }
-    temp=n;
-    long long sum=0;
-    while(temp>0){
-        int d=temp%10;
-        long long p=1;
-        for(int i=0;i<digits;i++) p*=d;
-        sum+=p;
-        temp/=10;
+    if(second==INT_MIN){
+        cout<<"NO SECOND LARGEST\n";
+    }else{
+        cout<<second<<"\n";
     }
-    if(sum==n)
-        cout<<"YES\n";
-    else
-        cout<<"NO\n";
     return 0;
 }
