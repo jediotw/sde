@@ -3,22 +3,19 @@ using namespace std;
 int main(){
     int n;
     cin>>n;
-    /*
-     why this soln works since the diff between two even numbers is at least 2
-     and the diff between two odd number is at least 2
-     and at the boundary the last even and first even is differ by more than 1 when n>=4 so
-     */
-    if(n==2 ||n==3){
-        cout<<"NO SOLUTION\n";
-        return 0;
+    //sieve of eratosthenes - find all primes from 1 to n
+    vector<bool> isPrime(n+1,true);
+    isPrime[0]=isPrime[1]=false;
+    for(int i=2;i*i<=n;i++){
+        if(isPrime[i]){
+            for(int j=i*i;j<=n;j+=i){
+                isPrime[j]=false;
+            }
+        }
     }
-    //step1.print even numbers
-    for(int i=2;i<=n;i+=2){
-        cout<<i<<" ";
+    for(int i=2;i<=n;i++){
+        if(isPrime[i]) cout<<i<<" ";
     }
-    //step2.print odd numbers
-    for(int i=1;i<=n;i+=2){
-        cout<<i<<" ";
-    }
+    cout<<"\n";
     return 0;
-}    
+}
