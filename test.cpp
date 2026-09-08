@@ -1,24 +1,26 @@
 #include<bits/stdc++.h>
 using namespace std;
 int main(){
-    int n;
+    long long n;
     cin>>n;
-    /*
-     why this soln works since the diff between two even numbers is at least 2
-     and the diff between two odd number is at least 2
-     and at the boundary the last even and first even is differ by more than 1 when n>=4 so
-     */
-    if(n==2 ||n==3){
-        cout<<"NO SOLUTION\n";
-        return 0;
+    long long temp=n;
+    int digits=0;
+    while(temp>0){
+        digits++;
+        temp/=10;
     }
-    //step1.print even numbers
-    for(int i=2;i<=n;i+=2){
-        cout<<i<<" ";
+    temp=n;
+    long long sum=0;
+    while(temp>0){
+        int d=temp%10;
+        long long p=1;
+        for(int i=0;i<digits;i++) p*=d;
+        sum+=p;
+        temp/=10;
     }
-    //step2.print odd numbers
-    for(int i=1;i<=n;i+=2){
-        cout<<i<<" ";
-    }
+    if(sum==n)
+        cout<<"YES\n";
+    else
+        cout<<"NO\n";
     return 0;
-}    
+}
